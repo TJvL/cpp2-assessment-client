@@ -30,7 +30,7 @@ namespace cpp2 {
         unsigned long fileSize;
         try {
             fileSize = std::stoul(response);
-        } catch (std::invalid_argument &error) {
+        } catch (const std::invalid_argument &error) {
             throw std::logic_error{"unknown server response aborting command"};
         }
 

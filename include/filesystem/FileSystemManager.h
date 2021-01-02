@@ -27,9 +27,9 @@ namespace cpp2 {
         std::vector<FileInfo> listDirectoryInformation(const std::filesystem::path &relativePath) const;
 
         void writeFileFromStream(const std::filesystem::path &relativePath, std::istream &readStream,
-                                 unsigned long readSize) const;
+                                 const unsigned long readSize) const;
 
-        std::unique_ptr<std::istream> openReadFileStream(const std::filesystem::path &relativePath) const;
+        std::unique_ptr<const std::istream> openReadFileStream(const std::filesystem::path &relativePath) const;
 
     private:
         const std::filesystem::path rootSyncPath;

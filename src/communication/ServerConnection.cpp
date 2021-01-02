@@ -39,7 +39,7 @@ namespace cpp2 {
         return stream;
     }
 
-    void ServerConnection::pipeStreamTillEnd(std::istream &inputStream) {
+    void ServerConnection::pipeStreamTillEnd(const std::istream &inputStream) {
         stream << inputStream.rdbuf();
     }
 }
