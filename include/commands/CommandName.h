@@ -1,0 +1,18 @@
+#ifndef CPP2CLIENT_COMMANDNAME_H
+#define CPP2CLIENT_COMMANDNAME_H
+
+namespace cpp2 {
+    enum CommandName {
+        SERVER_INFORMATION,
+        REQUEST_DIRECTORY_LISTING,
+        DOWNLOAD_REMOTE_FILE,
+        UPLOAD_LOCAL_FILE,
+        RENAME,
+        DELETE,
+        MAKE_DIRECTORY,
+        SYNC_DIRECTORY,
+        QUIT
+    };
+}
+
+#endif //CPP2CLIENT_COMMANDNAME_H
