@@ -7,6 +7,10 @@ namespace cpp2 {
     bool RenameCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
         const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
+        if (relativePath.empty()) {
+            throw std::logic_error{"can't rename root"};
+        }
+
         if (!fileSystemManager.pathExists(relativePath)) {
             throw std::logic_error{"no such directory or file present locally"};
         }
