@@ -1,12 +1,13 @@
 #include "../../../include/commands/implementations/DownloadRemoteFileCommand.h"
-#include "../../../include/ConsolePrintHelpers.h"
+#include "../../../include/helpers/UserInterfaceHelpers.h"
+#include "../../../include/helpers/ErrorCheckHelpers.h"
 
 namespace cpp2 {
     DownloadRemoteFileCommand::DownloadRemoteFileCommand(ServerConnection &serverConnection, FileSystemManager &syncManager)
             : AbstractCommand(serverConnection, syncManager) {}
 
     bool DownloadRemoteFileCommand::execute() {
-        const auto relativePath = ConsolePrintHelpers::waitForPathInput();
+        const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (!fileSystemManager.pathExists(relativePath)) {
             throw std::logic_error{"no such directory present locally"};
@@ -21,17 +22,11 @@ namespace cpp2 {
 
         const auto response = serverConnection.waitForIncomingMessage();
 
-        if (response == ERROR_NO_SUCH_FILE) {
-            throw std::logic_error{"no such file present remotely"};
-        } else if (response == ERROR_NO_PERMISSION) {
-            throw std::logic_error{"no permission remotely"};
-        }
-
         unsigned long fileSize;
         try {
             fileSize = std::stoul(response);
         } catch (const std::invalid_argument &error) {
-            throw std::logic_error{"unknown server response aborting command"};
+            ErrorCheckHelpers::throwServerError(response);
         }
 
         auto &inputStream = serverConnection.getIncomingStream();

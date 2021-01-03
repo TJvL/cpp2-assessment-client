@@ -13,23 +13,23 @@ namespace cpp2 {
     std::unique_ptr<AbstractCommand> CommandFactory::createCommand(CommandName commandName, ServerConnection& serverConnection, FileSystemManager &fileSystemManager) const {
         switch (commandName) {
             case SERVER_INFORMATION:
-                return std::move(CommandFactory::create<ServerInformationCommand>(serverConnection, fileSystemManager));
+                return CommandFactory::create<ServerInformationCommand>(serverConnection, fileSystemManager);
             case REQUEST_DIRECTORY_LISTING:
-                return std::move(CommandFactory::create<RequestDirectoryListingCommand>(serverConnection, fileSystemManager));
+                return CommandFactory::create<RequestDirectoryListingCommand>(serverConnection, fileSystemManager);
             case MAKE_DIRECTORY:
-                return std::move(CommandFactory::create<MakeDirectoryCommand>(serverConnection, fileSystemManager));
+                return CommandFactory::create<MakeDirectoryCommand>(serverConnection, fileSystemManager);
             case DOWNLOAD_REMOTE_FILE:
-                return std::move(CommandFactory::create<DownloadRemoteFileCommand>(serverConnection, fileSystemManager));
+                return CommandFactory::create<DownloadRemoteFileCommand>(serverConnection, fileSystemManager);
             case UPLOAD_LOCAL_FILE:
-                return std::move(CommandFactory::create<UploadLocalFileCommand>(serverConnection, fileSystemManager));
+                return CommandFactory::create<UploadLocalFileCommand>(serverConnection, fileSystemManager);
             case RENAME:
-                return std::move(CommandFactory::create<RenameCommand>(serverConnection, fileSystemManager));
+                return CommandFactory::create<RenameCommand>(serverConnection, fileSystemManager);
             case DELETE:
-                return std::move(CommandFactory::create<DeleteCommand>(serverConnection, fileSystemManager));
+                return CommandFactory::create<DeleteCommand>(serverConnection, fileSystemManager);
             case SYNC_DIRECTORY:
-                return std::move(CommandFactory::create<SynchronizeDirectoryCommand>(serverConnection, fileSystemManager));
+                return CommandFactory::create<SynchronizeDirectoryCommand>(serverConnection, fileSystemManager);
             case QUIT:
-                return std::move(CommandFactory::create<QuitCommand>(serverConnection, fileSystemManager));
+                return CommandFactory::create<QuitCommand>(serverConnection, fileSystemManager);
             default:
                 throw std::runtime_error("the given command name has no implementation");
         }

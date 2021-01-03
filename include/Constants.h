@@ -8,7 +8,8 @@
 // user prompts
 #define ENTER_CHOICE_PROMPT "enter choice: "
 #define ENTER_TO_CONTINUE_PROMPT "press enter to continue..."
-#define ENTER_DIRECTORY_PROMPT "enter path starting from root sync directory: "
+#define ENTER_DIRECTORY_NAME_PROMPT "enter directory name: "
+#define ENTER_DIRECTORY_PATH_PROMPT "enter path starting from root sync directory (enter only a '.' for root): "
 
 // server commands
 #define INFO_COMMAND "INFO"
@@ -22,6 +23,7 @@
 
 // server responses
 #define OK_RESPONSE "OK"
+#define ERROR_NO_SUCH_PATH "Error: no such file or directory"
 #define ERROR_NO_SUCH_FILE "Error: no such file"
 #define ERROR_NO_SUCH_DIRECTORY "Error: no such directory"
 #define ERROR_NO_PERMISSION "Error: no permission"

@@ -10,12 +10,21 @@ namespace cpp2 {
         }
     }
 
+    bool FileSystemManager::hasWritePermissions(const std::filesystem::path &relativePath) const {
+        auto status = std::filesystem::status(rootSyncPath / relativePath);
+        return (status.permissions() & std::filesystem::perms::group_write) != std::filesystem::perms::none;
+    }
+
     bool FileSystemManager::pathExists(const std::filesystem::path &relativePath) const {
         return std::filesystem::exists(rootSyncPath / relativePath);
     }
 
     bool FileSystemManager::refersToFile(const std::filesystem::path &relativePath) const {
         return std::filesystem::is_regular_file(rootSyncPath / relativePath);
+    }
+
+    bool FileSystemManager::refersToDirectory(const std::filesystem::path &relativePath) const {
+        return std::filesystem::is_directory(rootSyncPath / relativePath);
     }
 
     unsigned long FileSystemManager::fileSize(const std::filesystem::path &relativePath) const {

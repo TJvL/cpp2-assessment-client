@@ -9,7 +9,6 @@ find_package(Threads REQUIRED)
 
 set(INCLUDES
         include/Constants.h
-        include/ConsolePrintHelpers.h
         include/Application.h
         include/commands/CommandSelector.h
         include/communication/Client.h
@@ -29,7 +28,9 @@ set(INCLUDES
         include/filesystem/FileSystemManager.h
         include/filesystem/FileInfo.h
         include/filesystem/FileType.h
-        include/filesystem/FileTypeMapper.h)
+        include/filesystem/FileTypeMapper.h
+        include/helpers/UserInterfaceHelpers.h
+        include/helpers/ErrorCheckHelpers.h)
 
 set(SOURCE_FILES
         src/Main.cpp
@@ -47,11 +48,12 @@ set(SOURCE_FILES
         src/commands/implementations/MakeDirectoryCommand.cpp
         src/commands/implementations/QuitCommand.cpp
         src/commands/implementations/SynchronizeDirectoryCommand.cpp
-        src/filesystem/FileSystemManager.cpp)
+        src/filesystem/FileSystemManager.cpp
+        src/helpers/UserInterfaceHelpers.cpp
+        src/helpers/ErrorCheckHelpers.cpp)
 
 add_executable(Cpp2Client
         ${INCLUDES}
-        ${SOURCE_FILES}
-        )
+        ${SOURCE_FILES})
 
 target_link_libraries(Cpp2Client PRIVATE Threads::Threads)

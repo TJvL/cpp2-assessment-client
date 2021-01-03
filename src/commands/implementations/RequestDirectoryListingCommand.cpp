@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../../../include/commands/implementations/RequestDirectoryListingCommand.h"
-#include "../../../include/Constants.h"
-#include "../../../include/ConsolePrintHelpers.h"
+#include "../../../include/helpers/UserInterfaceHelpers.h"
+#include "../../../include/helpers/ErrorCheckHelpers.h"
 
 namespace cpp2 {
     RequestDirectoryListingCommand::RequestDirectoryListingCommand(ServerConnection &serverConnection,
@@ -9,7 +9,7 @@ namespace cpp2 {
             : AbstractCommand(serverConnection, fileSystemManager) {}
 
     bool RequestDirectoryListingCommand::execute() {
-        const auto relativePath = ConsolePrintHelpers::waitForPathInput();
+        const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (!fileSystemManager.pathExists(relativePath)) {
             throw std::logic_error{"no such directory present locally"};
@@ -24,11 +24,19 @@ namespace cpp2 {
             throw std::logic_error{"no such directory present remotely"};
         }
 
-        const auto listingAmount = std::stoi(response);
+        unsigned long listingAmount;
+        try {
+            listingAmount = std::stoul(response);
+        } catch (const std::invalid_argument &error) {
+            ErrorCheckHelpers::throwServerError(response);
+        }
 
-        std::cout << "List of entries in server directory:" << NEW_LINE;
-        for (auto a = 0; a < listingAmount; ++a) {
-            std::cout << serverConnection.waitForIncomingMessage() << NEW_LINE;
+        if (listingAmount > 0) {
+            for (auto a = 0; a < listingAmount; ++a) {
+                std::cout << serverConnection.waitForIncomingMessage() << NEW_LINE;
+            }
+        } else {
+            std::cout << "remote directory is empty" << NEW_LINE;
         }
 
         // client is not shutting down after this execution

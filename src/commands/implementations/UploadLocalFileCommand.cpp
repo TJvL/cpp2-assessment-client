@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../../../include/commands/implementations/UploadLocalFileCommand.h"
-#include "../../../include/ConsolePrintHelpers.h"
+#include "../../../include/helpers/UserInterfaceHelpers.h"
+#include "../../../include/helpers/ErrorCheckHelpers.h"
 
 namespace cpp2 {
 
@@ -8,7 +9,7 @@ namespace cpp2 {
             : AbstractCommand(serverConnection, syncManager) {}
 
     bool UploadLocalFileCommand::execute() {
-        const auto relativePath = ConsolePrintHelpers::waitForPathInput();
+        const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (!fileSystemManager.pathExists(relativePath)) {
             throw std::logic_error{"no such directory present locally"};
@@ -27,8 +28,10 @@ namespace cpp2 {
         serverConnection.sentOutgoingMessage(std::to_string(fileSize));
 
         const auto response = serverConnection.waitForIncomingMessage();
-        // check if the response was an 'OK' else throw error
-        throwIfErrorResponse(response);
+
+        if (response != OK_RESPONSE) {
+            ErrorCheckHelpers::throwServerError(response);
+        }
 
         serverConnection.pipeStreamTillEnd(*fileStream);
 
@@ -36,19 +39,5 @@ namespace cpp2 {
 
         // client is not shutting down after this execution
         return true;
-    }
-
-    void UploadLocalFileCommand::throwIfErrorResponse(const std::string& response) {
-        if (response != OK_RESPONSE) {
-            if (response == ERROR_NO_SUCH_DIRECTORY) {
-                throw std::logic_error{"no such directory present remotely"};
-            } else if (response == ERROR_NOT_ENOUGH_DISK_SPACE) {
-                throw std::logic_error{"not enough disk space available remotely"};
-            } else if (response == ERROR_NO_PERMISSION) {
-                throw std::logic_error{"no permission remotely"};
-            } else {
-                throw std::logic_error{"unknown server response aborting command"};
-            }
-        }
     }
 }

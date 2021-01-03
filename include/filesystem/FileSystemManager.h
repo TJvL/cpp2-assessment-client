@@ -12,9 +12,13 @@ namespace cpp2 {
 
         virtual ~FileSystemManager() = default;
 
+        bool hasWritePermissions(const std::filesystem::path &relativePath) const;
+
         bool pathExists(const std::filesystem::path &relativePath) const;
 
         bool refersToFile(const std::filesystem::path &relativePath) const;
+
+        bool refersToDirectory(const std::filesystem::path &relativePath) const;
 
         unsigned long fileSize(const std::filesystem::path &relativePath) const;
 

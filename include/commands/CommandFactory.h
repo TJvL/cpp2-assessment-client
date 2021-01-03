@@ -17,7 +17,7 @@ namespace cpp2 {
     private:
         template<ACommand AC>
         std::unique_ptr<AC> create(ServerConnection& serverConnection, FileSystemManager &fileSystemManager) const {
-            return std::move(std::make_unique<AC>(serverConnection, fileSystemManager));
+            return std::make_unique<AC>(serverConnection, fileSystemManager);
         }
     };
 }

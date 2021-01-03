@@ -11,9 +11,6 @@ namespace cpp2 {
         ~UploadLocalFileCommand() override = default;
 
         bool execute() override;
-
-    private:
-        static void throwIfErrorResponse(const std::string& response);
     };
 }
 

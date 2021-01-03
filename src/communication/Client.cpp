@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../../include/communication/Client.h"
 #include "../../include/Constants.h"
-#include "../../include/ConsolePrintHelpers.h"
+#include "../../include/helpers/UserInterfaceHelpers.h"
 
 namespace cpp2 {
     Client::Client(const std::string& host, const std::string& port, const std::string& syncDirectoryName)
@@ -20,7 +20,7 @@ namespace cpp2 {
             }
 
             if (handlingCommands) {
-                ConsolePrintHelpers::waitForEnterKey();
+                UserInterfaceHelpers::waitForEnterKey();
             }
         }
     }

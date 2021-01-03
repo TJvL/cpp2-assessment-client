@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../../include/commands/CommandSelector.h"
 #include "../../include/Constants.h"
-#include "../../include/ConsolePrintHelpers.h"
+#include "../../include/helpers/UserInterfaceHelpers.h"
 
 namespace cpp2 {
     CommandSelector::CommandSelector()
@@ -21,7 +21,7 @@ namespace cpp2 {
         CommandName command;
         auto choosing = true;
         while (choosing) {
-            ConsolePrintHelpers::printCommandOptions();
+            UserInterfaceHelpers::printCommandOptions();
             std::string input;
             std::cin >> input;
             std::cout << NEW_LINE;
@@ -30,7 +30,7 @@ namespace cpp2 {
                 choosing = false;
             } catch (const std::out_of_range &error) {
                 std::cout << "that is not a valid choice" << NEW_LINE;
-                ConsolePrintHelpers::waitForEnterKey();
+                UserInterfaceHelpers::waitForEnterKey();
             }
         }
         return command;
