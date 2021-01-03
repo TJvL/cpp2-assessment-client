@@ -2,10 +2,7 @@
 
 namespace cpp2 {
 
-    SynchronizeDirectoryCommand::SynchronizeDirectoryCommand(ServerConnection &serverConnection, FileSystemManager &syncManager)
-            : AbstractCommand(serverConnection, syncManager) {}
-
-    bool SynchronizeDirectoryCommand::execute() {
+    bool SynchronizeDirectoryCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
         return false;
     }
 }

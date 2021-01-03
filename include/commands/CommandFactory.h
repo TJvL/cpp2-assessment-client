@@ -12,12 +12,12 @@ namespace cpp2 {
 
         ~CommandFactory() = default;
 
-        std::unique_ptr<AbstractCommand> createCommand(CommandName commandName, ServerConnection& serverConnection, FileSystemManager &fileSystemManager) const;
+        std::unique_ptr<AbstractCommand> createCommand(CommandName commandName) const;
 
     private:
         template<ACommand AC>
-        std::unique_ptr<AC> create(ServerConnection& serverConnection, FileSystemManager &fileSystemManager) const {
-            return std::make_unique<AC>(serverConnection, fileSystemManager);
+        std::unique_ptr<AC> create() const {
+            return std::make_unique<AC>();
         }
     };
 }

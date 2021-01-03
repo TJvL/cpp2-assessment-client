@@ -3,10 +3,8 @@
 #include "../../../include/Constants.h"
 
 namespace cpp2 {
-    ServerInformationCommand::ServerInformationCommand(ServerConnection &serverConnection, FileSystemManager &syncManager)
-            : AbstractCommand(serverConnection, syncManager) {}
 
-    bool ServerInformationCommand::execute() {
+    bool ServerInformationCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
         serverConnection.sentOutgoingMessage(INFO_COMMAND);
         auto response = serverConnection.waitForIncomingMessage();
         std::cout << response << NEW_LINE;

@@ -4,10 +4,7 @@
 
 namespace cpp2 {
 
-    MakeDirectoryCommand::MakeDirectoryCommand(ServerConnection &serverConnection, FileSystemManager &syncManager)
-            : AbstractCommand(serverConnection, syncManager) {}
-
-    bool MakeDirectoryCommand::execute() {
+    bool MakeDirectoryCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
         const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (!fileSystemManager.pathExists(relativePath)) {

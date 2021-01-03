@@ -4,11 +4,8 @@
 #include "../../../include/helpers/ErrorCheckHelpers.h"
 
 namespace cpp2 {
-    RequestDirectoryListingCommand::RequestDirectoryListingCommand(ServerConnection &serverConnection,
-                                                                   FileSystemManager &fileSystemManager)
-            : AbstractCommand(serverConnection, fileSystemManager) {}
 
-    bool RequestDirectoryListingCommand::execute() {
+    bool RequestDirectoryListingCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
         const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (!fileSystemManager.pathExists(relativePath)) {

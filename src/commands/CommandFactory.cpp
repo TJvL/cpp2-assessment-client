@@ -10,26 +10,26 @@
 #include "../../include/commands/implementations/QuitCommand.h"
 
 namespace cpp2 {
-    std::unique_ptr<AbstractCommand> CommandFactory::createCommand(CommandName commandName, ServerConnection& serverConnection, FileSystemManager &fileSystemManager) const {
+    std::unique_ptr<AbstractCommand> CommandFactory::createCommand(CommandName commandName) const {
         switch (commandName) {
             case SERVER_INFORMATION:
-                return CommandFactory::create<ServerInformationCommand>(serverConnection, fileSystemManager);
+                return CommandFactory::create<ServerInformationCommand>();
             case REQUEST_DIRECTORY_LISTING:
-                return CommandFactory::create<RequestDirectoryListingCommand>(serverConnection, fileSystemManager);
+                return CommandFactory::create<RequestDirectoryListingCommand>();
             case MAKE_DIRECTORY:
-                return CommandFactory::create<MakeDirectoryCommand>(serverConnection, fileSystemManager);
+                return CommandFactory::create<MakeDirectoryCommand>();
             case DOWNLOAD_REMOTE_FILE:
-                return CommandFactory::create<DownloadRemoteFileCommand>(serverConnection, fileSystemManager);
+                return CommandFactory::create<DownloadRemoteFileCommand>();
             case UPLOAD_LOCAL_FILE:
-                return CommandFactory::create<UploadLocalFileCommand>(serverConnection, fileSystemManager);
+                return CommandFactory::create<UploadLocalFileCommand>();
             case RENAME:
-                return CommandFactory::create<RenameCommand>(serverConnection, fileSystemManager);
+                return CommandFactory::create<RenameCommand>();
             case DELETE:
-                return CommandFactory::create<DeleteCommand>(serverConnection, fileSystemManager);
+                return CommandFactory::create<DeleteCommand>();
             case SYNC_DIRECTORY:
-                return CommandFactory::create<SynchronizeDirectoryCommand>(serverConnection, fileSystemManager);
+                return CommandFactory::create<SynchronizeDirectoryCommand>();
             case QUIT:
-                return CommandFactory::create<QuitCommand>(serverConnection, fileSystemManager);
+                return CommandFactory::create<QuitCommand>();
             default:
                 throw std::runtime_error("the given command name has no implementation");
         }

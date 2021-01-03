@@ -6,11 +6,7 @@
 namespace cpp2 {
     class SynchronizeDirectoryCommand : public AbstractCommand {
     public:
-        explicit SynchronizeDirectoryCommand(ServerConnection &serverConnection, FileSystemManager &syncManager);
-
-        ~SynchronizeDirectoryCommand() override = default;
-
-        bool execute() override;
+        bool execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) override;
     };
 }
 

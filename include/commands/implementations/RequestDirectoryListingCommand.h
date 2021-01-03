@@ -6,11 +6,7 @@
 namespace cpp2 {
     class RequestDirectoryListingCommand : public AbstractCommand {
     public:
-        explicit RequestDirectoryListingCommand(ServerConnection &serverConnection, FileSystemManager &fileSystemManager);
-
-        ~RequestDirectoryListingCommand() override = default;
-
-        bool execute() override;
+        bool execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) override;
     };
 }
 

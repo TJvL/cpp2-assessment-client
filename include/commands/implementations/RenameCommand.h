@@ -6,11 +6,7 @@
 namespace cpp2 {
     class RenameCommand : public AbstractCommand {
     public:
-        explicit RenameCommand(ServerConnection &serverConnection, FileSystemManager &syncManager);
-
-        ~RenameCommand() override = default;
-
-        bool execute() override;
+        bool execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) override;
     };
 }
 

@@ -6,11 +6,7 @@
 namespace cpp2 {
     class DeleteCommand : public AbstractCommand  {
     public:
-        explicit DeleteCommand(ServerConnection &serverConnection, FileSystemManager &syncManager);
-
-        ~DeleteCommand() override = default;
-
-        bool execute() override;
+        bool execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) override;
     };
 }
 

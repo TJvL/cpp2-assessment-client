@@ -10,15 +10,10 @@ namespace cpp2 {
     public:
         virtual ~AbstractCommand() = default;
 
-        virtual bool execute() = 0;
+        virtual bool execute(ServerConnection &serverConnection, FileSystemManager &syncManager) = 0;
 
     protected:
-        AbstractCommand(ServerConnection &serverConnection, FileSystemManager &fileSystemManager)
-                : serverConnection(serverConnection), fileSystemManager(fileSystemManager) {};
-
-        ServerConnection &serverConnection;
-
-        FileSystemManager &fileSystemManager;
+        AbstractCommand() = default;
     };
 
     template<class C>

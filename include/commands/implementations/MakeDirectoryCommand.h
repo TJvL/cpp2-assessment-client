@@ -6,11 +6,7 @@
 namespace cpp2 {
     class MakeDirectoryCommand : public AbstractCommand {
     public:
-        explicit MakeDirectoryCommand(ServerConnection &serverConnection, FileSystemManager &syncManager);
-
-        ~MakeDirectoryCommand() override = default;
-
-        bool execute() override;
+        bool execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) override;
     };
 }
 

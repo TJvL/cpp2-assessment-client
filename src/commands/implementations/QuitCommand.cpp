@@ -2,11 +2,7 @@
 #include "../../../include/Constants.h"
 
 namespace cpp2 {
-
-    QuitCommand::QuitCommand(ServerConnection &serverConnection, FileSystemManager &syncManager)
-            : AbstractCommand(serverConnection, syncManager) {}
-
-    bool QuitCommand::execute() {
+    bool QuitCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
         serverConnection.sentOutgoingMessage(QUIT_COMMAND);
         return false;
     }

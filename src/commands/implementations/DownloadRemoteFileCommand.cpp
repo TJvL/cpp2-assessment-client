@@ -3,10 +3,7 @@
 #include "../../../include/helpers/ErrorCheckHelpers.h"
 
 namespace cpp2 {
-    DownloadRemoteFileCommand::DownloadRemoteFileCommand(ServerConnection &serverConnection, FileSystemManager &syncManager)
-            : AbstractCommand(serverConnection, syncManager) {}
-
-    bool DownloadRemoteFileCommand::execute() {
+bool DownloadRemoteFileCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
         const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (!fileSystemManager.pathExists(relativePath)) {

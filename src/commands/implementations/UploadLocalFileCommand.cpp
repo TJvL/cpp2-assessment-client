@@ -5,10 +5,7 @@
 
 namespace cpp2 {
 
-    UploadLocalFileCommand::UploadLocalFileCommand(ServerConnection &serverConnection, FileSystemManager &syncManager)
-            : AbstractCommand(serverConnection, syncManager) {}
-
-    bool UploadLocalFileCommand::execute() {
+    bool UploadLocalFileCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
         const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (!fileSystemManager.pathExists(relativePath)) {
