@@ -3,7 +3,7 @@
 #include "../../../include/helpers/ErrorCheckHelpers.h"
 
 namespace cpp2 {
-    bool DeleteCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
+    bool DeleteCommand::execute(ServerConnection &serverConnection, const FileSystemManager &fileSystemManager) const {
         const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (relativePath.empty()) {

@@ -6,7 +6,7 @@
 namespace cpp2 {
     class ServerInformationCommand : public AbstractCommand {
     public:
-        bool execute(ServerConnection &serverConnection, FileSystemManager &syncManager) override;
+        bool execute(ServerConnection &serverConnection, const FileSystemManager &syncManager) const override;
     };
 }
 

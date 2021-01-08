@@ -11,8 +11,8 @@ namespace cpp2 {
         auto handlingCommands = true;
         while (handlingCommands) {
             try {
-                auto commandName = commandSelector.waitForCommandInput();
-                auto command = commandFactory.createCommand(commandName);
+                const auto commandName = commandSelector.waitForCommandInput();
+                const auto command = commandFactory.createCommand(commandName);
                 handlingCommands = command->execute(serverConnection, fileSystemManager);
             } catch (const std::logic_error &error) {
                 const auto message = error.what();

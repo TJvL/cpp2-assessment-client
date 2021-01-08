@@ -3,14 +3,13 @@
 
 #include <filesystem>
 #include <vector>
+#include <unordered_map>
 #include "../../include/filesystem/FileInfo.h"
 
 namespace cpp2 {
     class FileSystemManager {
     public:
         FileSystemManager(const std::string &syncDirectoryName = "sync");
-
-        virtual ~FileSystemManager() = default;
 
         bool hasWritePermissions(const std::filesystem::path &relativePath) const;
 
@@ -28,9 +27,9 @@ namespace cpp2 {
 
         void renamePath(const std::filesystem::path &relativePath, const std::string& newName) const;
 
-        std::vector<FileInfo> listDirectoryInformation(const std::filesystem::path &relativePath) const;
+        std::unique_ptr<std::unordered_map<std::string, FileInfo>> listDirectoryInformation(const std::filesystem::path &relativePath) const;
 
-        void writeFileFromStream(const std::filesystem::path &relativePath, std::istream &readStream,
+        void writeFileFromStream(const std::filesystem::path &relativePath, std::istream &inputStream,
                                  const unsigned long readSize) const;
 
         std::unique_ptr<const std::istream> openReadFileStream(const std::filesystem::path &relativePath) const;

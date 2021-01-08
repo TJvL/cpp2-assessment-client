@@ -4,38 +4,32 @@
 #include "FileType.h"
 
 namespace cpp2 {
-    struct FileInfo {
+    class FileInfo {
     public:
-        FileInfo(const std::string& fileName, const unsigned long fileSize, const std::time_t& lastModified, const FileType fileType)
-                : fileName(fileName), fileSize(fileSize), fileType(fileType), lastModified(lastModified) {}
+        FileInfo(std::string fileName, const unsigned long fileSize, const std::time_t lastModified,
+                 const FileType fileType);
 
-        virtual ~FileInfo() = default;
+        FileInfo(const std::string &listString);
 
-        std::string toString() const {
-            std::stringstream stringStream;
-            stringStream << getFileTypeCharacter() << '|'
-                         << fileName << '|'
-                         << lastModified << '|'
-                         << fileSize;
-            return stringStream.str();
-        }
+        std::string toString() const;
 
-        char getFileTypeCharacter() const {
-            switch (fileType) {
-                case FILE:
-                    return 'F';
-                case DIRECTORY:
-                    return 'D';
-                case OTHER:
-                default:
-                    return '*';
-            }
-        }
+        char getFileTypeCharacter() const;
 
-        const std::string fileName;
-        const unsigned long fileSize;
-        const FileType fileType;
-        const std::time_t lastModified;
+        static FileType getFileTypeFromCharacter(char c);
+
+        std::string getFileName() const;
+
+        unsigned long getFileSize() const;
+
+        FileType getFileType() const;
+
+        std::time_t getLastModified() const;
+
+    private:
+        std::string fileName;
+        unsigned long fileSize;
+        FileType fileType;
+        std::time_t lastModified;
     };
 }
 

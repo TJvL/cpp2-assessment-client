@@ -11,7 +11,7 @@ namespace cpp2 {
     }
 
     bool FileSystemManager::hasWritePermissions(const std::filesystem::path &relativePath) const {
-        auto status = std::filesystem::status(rootSyncPath / relativePath);
+        const auto status = std::filesystem::status(rootSyncPath / relativePath);
         return (status.permissions() & std::filesystem::perms::group_write) != std::filesystem::perms::none;
     }
 
@@ -40,31 +40,38 @@ namespace cpp2 {
     }
 
     void FileSystemManager::renamePath(const std::filesystem::path &relativePath, const std::string &newName) const {
-        auto oldPath = rootSyncPath / relativePath;
-        auto newPath = std::filesystem::path{oldPath}.replace_filename(newName);
+        const auto oldPath = rootSyncPath / relativePath;
+        const auto newPath = std::filesystem::path{oldPath}.replace_filename(newName);
         std::filesystem::rename(oldPath, newPath);
     }
 
-    std::vector<FileInfo> FileSystemManager::listDirectoryInformation(const std::filesystem::path &relativePath) const {
-        std::vector<FileInfo> listing;
+    std::unique_ptr<std::unordered_map<std::string, FileInfo>> FileSystemManager::listDirectoryInformation(const std::filesystem::path &relativePath) const {
+        auto listing = std::make_unique<std::unordered_map<std::string, FileInfo>>();
         for(auto& entry : std::filesystem::directory_iterator(rootSyncPath / relativePath)) {
-            auto fileName = entry.path().filename().c_str();
-            auto fileSize = entry.file_size();
-            auto fileType = getFileType(entry.status().type());
-            listing.emplace_back(fileName, fileSize, 0, fileType);
+            const auto fileName = entry.path().filename().c_str();
+            const auto fileType = getFileType(entry.status().type());
+            unsigned long fileSize{0};
+            if (fileType == FILE) {
+                fileSize = entry.file_size();
+            }
+            listing->emplace(fileName, std::move(FileInfo{fileName, fileSize, 0, fileType}));
         }
 
         return listing;
     }
 
-    void FileSystemManager::writeFileFromStream(const std::filesystem::path &relativePath, std::istream &readStream,
+    void FileSystemManager::writeFileFromStream(const std::filesystem::path &relativePath, std::istream &inputStream,
                                                 const unsigned long readSize) const {
         std::ofstream writeStream{rootSyncPath / relativePath, std::ifstream::out | std::ifstream::binary};
         writeStream.exceptions(std::ifstream::badbit);
 
-        std::copy_n(std::istreambuf_iterator<char>(readStream),
+        std::copy_n(std::istreambuf_iterator<char>(inputStream),
                     readSize,
                     std::ostreambuf_iterator<char>(writeStream));
+
+        inputStream.ignore(1);
+
+        writeStream.close();
     }
 
     std::unique_ptr<const std::istream> FileSystemManager::openReadFileStream(const std::filesystem::path& relativePath) const {

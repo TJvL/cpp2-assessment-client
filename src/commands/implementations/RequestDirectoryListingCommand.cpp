@@ -5,7 +5,7 @@
 
 namespace cpp2 {
 
-    bool RequestDirectoryListingCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
+    bool RequestDirectoryListingCommand::execute(ServerConnection &serverConnection, const FileSystemManager &fileSystemManager) const {
         const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (!fileSystemManager.pathExists(relativePath)) {
@@ -16,10 +16,6 @@ namespace cpp2 {
         serverConnection.sentOutgoingMessage(relativePath);
 
         const auto response = serverConnection.waitForIncomingMessage();
-
-        if (response == ERROR_NO_SUCH_DIRECTORY) {
-            throw std::logic_error{"no such directory present remotely"};
-        }
 
         unsigned long listingAmount;
         try {

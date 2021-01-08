@@ -10,11 +10,11 @@ namespace cpp2 {
                                  {"2", CommandName::REQUEST_DIRECTORY_LISTING},
                                  {"3", CommandName::DOWNLOAD_REMOTE_FILE},
                                  {"4", CommandName::UPLOAD_LOCAL_FILE},
-                                 {"5", CommandName::RENAME},
-                                 {"6", CommandName::DELETE},
+                                 {"5", CommandName::RENAME_PATH},
+                                 {"6", CommandName::DELETE_PATH},
                                  {"7", CommandName::MAKE_DIRECTORY},
                                  {"8", CommandName::SYNC_DIRECTORY},
-                                 {"9", CommandName::QUIT}
+                                 {"9", CommandName::QUIT_CLIENT}
                          }) {}
 
     CommandName CommandSelector::waitForCommandInput() const {

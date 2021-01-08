@@ -9,7 +9,7 @@ namespace cpp2 {
         if (!stream) {
             throw std::runtime_error("could not connect to server");
         } else {
-            auto message = waitForIncomingMessage();
+            const auto message = waitForIncomingMessage();
             std::cout << ENTER_CHOICE_PROMPT << message << NEW_LINE;
         }
     }

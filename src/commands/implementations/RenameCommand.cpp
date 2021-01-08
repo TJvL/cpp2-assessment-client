@@ -4,7 +4,7 @@
 
 namespace cpp2 {
 
-    bool RenameCommand::execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) {
+    bool RenameCommand::execute(ServerConnection &serverConnection, const FileSystemManager &fileSystemManager) const {
         const auto relativePath = UserInterfaceHelpers::waitForPathInput();
 
         if (relativePath.empty()) {

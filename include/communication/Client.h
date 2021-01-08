@@ -12,10 +12,10 @@ namespace cpp2 {
 
         void handleUserCommands();
     private:
-        CommandSelector commandSelector;
         ServerConnection serverConnection;
-        FileSystemManager fileSystemManager;
-        CommandFactory commandFactory;
+        const CommandSelector commandSelector;
+        const FileSystemManager fileSystemManager;
+        const CommandFactory commandFactory;
     };
 }
 

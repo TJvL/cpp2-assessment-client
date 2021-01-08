@@ -10,7 +10,7 @@ namespace cpp2 {
     public:
         virtual ~AbstractCommand() = default;
 
-        virtual bool execute(ServerConnection &serverConnection, FileSystemManager &syncManager) = 0;
+        virtual bool execute(ServerConnection &serverConnection, const FileSystemManager &syncManager) const = 0;
 
     protected:
         AbstractCommand() = default;

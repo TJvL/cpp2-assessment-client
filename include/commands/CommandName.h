@@ -7,11 +7,11 @@ namespace cpp2 {
         REQUEST_DIRECTORY_LISTING,
         DOWNLOAD_REMOTE_FILE,
         UPLOAD_LOCAL_FILE,
-        RENAME,
-        DELETE,
+        RENAME_PATH,
+        DELETE_PATH,
         MAKE_DIRECTORY,
         SYNC_DIRECTORY,
-        QUIT
+        QUIT_CLIENT
     };
 }
 

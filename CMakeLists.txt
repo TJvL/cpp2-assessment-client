@@ -50,7 +50,7 @@ set(SOURCE_FILES
         src/commands/implementations/SynchronizeDirectoryCommand.cpp
         src/filesystem/FileSystemManager.cpp
         src/helpers/UserInterfaceHelpers.cpp
-        src/helpers/ErrorCheckHelpers.cpp)
+        src/helpers/ErrorCheckHelpers.cpp src/filesystem/FileInfo.cpp)
 
 add_executable(Cpp2Client
         ${INCLUDES}

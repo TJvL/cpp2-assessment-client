@@ -6,7 +6,7 @@
 namespace cpp2 {
     class QuitCommand : public AbstractCommand {
     public:
-        bool execute(ServerConnection &serverConnection, FileSystemManager &fileSystemManager) override;
+        bool execute(ServerConnection &serverConnection, const FileSystemManager &fileSystemManager) const override;
     };
 }
 

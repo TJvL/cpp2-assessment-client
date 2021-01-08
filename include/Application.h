@@ -10,8 +10,6 @@ namespace cpp2 {
     public:
         Application(const std::string &host, const std::string &port, const std::string &syncDirectoryName);
 
-        virtual ~Application() = default;
-
         int run();
 
     private:

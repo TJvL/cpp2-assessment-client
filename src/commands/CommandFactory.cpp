@@ -10,7 +10,7 @@
 #include "../../include/commands/implementations/QuitCommand.h"
 
 namespace cpp2 {
-    std::unique_ptr<AbstractCommand> CommandFactory::createCommand(CommandName commandName) const {
+    std::unique_ptr<const AbstractCommand> CommandFactory::createCommand(const CommandName commandName) const {
         switch (commandName) {
             case SERVER_INFORMATION:
                 return CommandFactory::create<ServerInformationCommand>();
@@ -22,13 +22,13 @@ namespace cpp2 {
                 return CommandFactory::create<DownloadRemoteFileCommand>();
             case UPLOAD_LOCAL_FILE:
                 return CommandFactory::create<UploadLocalFileCommand>();
-            case RENAME:
+            case RENAME_PATH:
                 return CommandFactory::create<RenameCommand>();
-            case DELETE:
+            case DELETE_PATH:
                 return CommandFactory::create<DeleteCommand>();
             case SYNC_DIRECTORY:
                 return CommandFactory::create<SynchronizeDirectoryCommand>();
-            case QUIT:
+            case QUIT_CLIENT:
                 return CommandFactory::create<QuitCommand>();
             default:
                 throw std::runtime_error("the given command name has no implementation");

@@ -8,16 +8,12 @@
 namespace cpp2 {
     class CommandFactory {
     public:
-        CommandFactory() = default;
-
-        ~CommandFactory() = default;
-
-        std::unique_ptr<AbstractCommand> createCommand(CommandName commandName) const;
+        std::unique_ptr<const AbstractCommand> createCommand(const CommandName commandName) const;
 
     private:
         template<ACommand AC>
-        std::unique_ptr<AC> create() const {
-            return std::make_unique<AC>();
+        std::unique_ptr<const AC> create() const {
+            return std::make_unique<const AC>();
         }
     };
 }
