@@ -34,7 +34,6 @@ namespace cpp2 {
 
         std::cout << "local file uploaded" << NEW_LINE;
 
-        // client is not shutting down after this execution
         return true;
     }
 }

@@ -28,13 +28,19 @@ namespace cpp2 {
         std::cin >> input;
         std::cout << NEW_LINE;
 
-        // check if input contains any invalid characters
-        if (input.rfind('.', 0) != std::string::npos
-            || input.rfind('~', 0) != std::string::npos
-            || input.rfind("..", 0) != std::string::npos
-            || input.rfind('/', 0) != std::string::npos
-            || input.rfind('\\', 0) != std::string::npos) {
-            throw std::logic_error{"directory name cannot contain '.', '..', '~', '/' or '\\'"};
+        if(input.length() == 1
+           && input.rfind('.', 0) == 0) {
+            throw std::logic_error{"directory name cannot be only '.'"};
+        }
+
+        if(input.length() == 2
+           && input.rfind("..", 1) == 0) {
+            throw std::logic_error{"directory name cannot be only '..'"};
+        }
+
+        // check if input starts with any invalid characters
+        if (input.rfind('/') != std::string::npos) {
+            throw std::logic_error{"directory name cannot contain '/'"};
         }
 
         return input;
@@ -63,11 +69,10 @@ namespace cpp2 {
 
         // check if input contains any characters
         // that can be used to refer to paths outside of sync directory
-        if (input.rfind('.', 0) != std::string::npos
-            || input.rfind('~', 0) != std::string::npos
-            || input.rfind("..", 0) != std::string::npos) {
-            throw std::logic_error{"path cannot contain '.', '..' or '~' except or only a '.' for root"};
-        }
+//        if (input.rfind('.', 0) != std::string::npos
+//            || input.rfind("..", 0) != std::string::npos) {
+//            throw std::logic_error{"path cannot contain '.' or '..' except for only a '.' for root"};
+//        }
 
         return input;
     }

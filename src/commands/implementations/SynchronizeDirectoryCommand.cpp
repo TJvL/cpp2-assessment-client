@@ -12,6 +12,8 @@ namespace cpp2 {
 
         syncDirectory(relativePath, serverConnection, fileSystemManager);
 
+        std::cout << "path synchronised" << NEW_LINE;
+
         return true;
     }
 

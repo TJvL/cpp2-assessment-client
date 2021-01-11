@@ -28,6 +28,8 @@ namespace cpp2 {
 
         fileSystemManager.renamePath(relativePath, newName);
 
+        std::cout << "path renamed" << NEW_LINE;
+
         return true;
     }
 }

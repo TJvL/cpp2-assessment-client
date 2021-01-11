@@ -32,7 +32,6 @@ namespace cpp2 {
             std::cout << "remote directory is empty" << NEW_LINE;
         }
 
-        // client is not shutting down after this execution
         return true;
     }
 }
