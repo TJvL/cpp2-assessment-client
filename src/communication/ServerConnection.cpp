@@ -14,10 +14,6 @@ namespace cpp2 {
         }
     }
 
-    ServerConnection::~ServerConnection() {
-        stream.close();
-    }
-
     std::string ServerConnection::waitForIncomingMessage() {
         std::string message;
         getline(stream, message);

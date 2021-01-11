@@ -9,16 +9,6 @@ namespace cpp2 {
     public:
         ServerConnection(const std::string &host, const std::string &port);
 
-        ~ServerConnection();
-
-        ServerConnection(const ServerConnection &other) = delete;
-
-        ServerConnection(ServerConnection &&other) = delete;
-
-        ServerConnection &operator=(const ServerConnection &other) = delete;
-
-        ServerConnection &operator=(ServerConnection &&other) = delete;
-
         std::string waitForIncomingMessage();
 
         void sentOutgoingMessage(const std::string &message);
