@@ -2,7 +2,7 @@
 #define CPP2CLIENT_SERVERCONNECTION_H
 
 #include <string>
-#include <asio/ip/tcp.hpp>
+#include <asio.hpp>
 
 namespace cpp2 {
     class ServerConnection {

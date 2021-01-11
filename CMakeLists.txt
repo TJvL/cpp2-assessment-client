@@ -56,4 +56,6 @@ add_executable(Cpp2Client
         ${INCLUDES}
         ${SOURCE_FILES})
 
+target_include_directories(Cpp2Client PRIVATE lib/asio-standalone)
+
 target_link_libraries(Cpp2Client PRIVATE Threads::Threads)
